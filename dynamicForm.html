@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style></style>
+    <script>
+      function demo(e) {
+        e.preventDefault();
+        var elements = document.getElementById("form").elements;
+        for (var i = 0; i < elements.length - 1; i++) {
+          switch (elements[i].type) {
+            case "text":
+              validateEmpty(elements[i]);
+              break;
+            case "email":
+              validateEmail(elements[i]);
+              break;
+            case "textarea":
+              validateEmpty(elements[i]);
+              break;
+            default:
+              return null;
+          }
+        }
+      }
+      function validateEmpty(e) {
+        if (e.value == "") {
+          e.nextElementSibling.innerHTML = "error";
+          e.nextElementSibling.classList.remove("text-success");
+          e.nextElementSibling.classList.add("text-danger");
+          e.style.border = "1px solid red";
+        } else {
+          e.nextElementSibling.innerHTML = "Success";
+          e.nextElementSibling.classList.remove("text-danger");
+          e.nextElementSibling.classList.add("text-success");
+          e.style.border = "1px solid green";
+        }
+      }
+      function validateEmail(e) {
+        if (
+          !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+            e.value
+          )
+        ) {
+          e.nextElementSibling.innerHTML = "Email not Valid";
+          e.nextElementSibling.classList.remove("text-success");
+          e.nextElementSibling.classList.add("text-danger");
+          e.style.border = "1px solid red";
+        } else {
+          e.nextElementSibling.innerHTML = "Success";
+          e.nextElementSibling.classList.remove("text-danger");
+          e.nextElementSibling.classList.add("text-success");
+          e.style.border = "1px solid green";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <form name="form" id="form" method="post">
+        <div class="form-group">
+          <label>Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Your Name Please"
+          /><span class="msg"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="name@example.com"
+          /><span class="msg"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            name="message"
+            rows="3"
+          ></textarea
+          ><span class="msg"></span>
+        </div>
+
+        <button
+          type="submit"
+          name="submit"
+          onclick="demo(event)"
+          class="btn text-center ml-auto"
+        >
+          Submit</button
+        ><br /><br />
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
